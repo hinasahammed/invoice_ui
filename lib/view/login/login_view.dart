@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:invoice_ui/res/components/common/custom_button.dart';
 import 'package:invoice_ui/res/components/common/custom_textformfield.dart';
-import 'package:invoice_ui/view/login/login_view.dart';
+import 'package:invoice_ui/view/register/register_view.dart';
+import 'package:invoice_ui/view/tabBar/custom_tab_bar_view.dart';
 
-class RegisterView extends StatelessWidget {
-  const RegisterView({super.key});
+class LoginView extends StatelessWidget {
+  const LoginView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final size = MediaQuery.sizeOf(context);
+
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -32,13 +34,13 @@ class RegisterView extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Register",
+                "Login",
                 style: theme.textTheme.titleLarge!.copyWith(
                   color: theme.colorScheme.onSurface,
                 ),
               ),
               Text(
-                "Register to your account",
+                "Login to your account",
                 style: theme.textTheme.bodyLarge!.copyWith(
                   color: theme.colorScheme.onSurface.withOpacity(.4),
                 ),
@@ -52,16 +54,6 @@ class RegisterView extends StatelessWidget {
                 ),
                 label: "Username",
               ),
-              CustomTextformfield(
-                prefixIcon: Icons.mail_outline,
-                borderRadius: BorderRadius.circular(0),
-                label: "Email",
-              ),
-              CustomTextformfield(
-                prefixIcon: Icons.phone,
-                borderRadius: BorderRadius.circular(0),
-                label: "Phone",
-              ),
               const CustomTextformfield(
                 prefixIcon: Icons.lock,
                 borderRadius: BorderRadius.only(
@@ -71,7 +63,17 @@ class RegisterView extends StatelessWidget {
                 suffixIcon: Icons.visibility_outlined,
                 label: "Password",
               ),
-              const Gap(50),
+              const Gap(20),
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "Forget password?",
+                  style: theme.textTheme.labelLarge!.copyWith(
+                    color: theme.colorScheme.primary,
+                  ),
+                ),
+              ),
+              const Gap(20),
               SizedBox(
                 height: 50,
                 child: CustomButton(
@@ -79,11 +81,11 @@ class RegisterView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (ctx) => const LoginView(),
+                        builder: (ctx) => const CustomTabBarView(),
                       ),
                     );
                   },
-                  btnTitle: "Sign up",
+                  btnTitle: "Login",
                 ),
               ),
               const Gap(50),
@@ -91,7 +93,7 @@ class RegisterView extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Alredy have an account",
+                    "Don't have an account",
                     style: theme.textTheme.labelLarge!.copyWith(
                       color: theme.colorScheme.onSurface,
                     ),
@@ -101,12 +103,12 @@ class RegisterView extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (ctx) => const LoginView(),
+                            builder: (ctx) => const RegisterView(),
                           ),
                         );
                       },
                       child: Text(
-                        "Login",
+                        "Signup",
                         style: theme.textTheme.labelLarge!.copyWith(
                           color: theme.colorScheme.primary,
                         ),
