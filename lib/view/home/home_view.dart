@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:invoice_ui/assets/icons/icon_asset.dart';
+import 'package:invoice_ui/assets/images/image_asset.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -11,7 +13,7 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Image.asset('assets/icons/logo.png'),
+        leading: Image.asset(IconAsset.logo),
         title: const Text("Trialz"),
         actions: [
           Container(
@@ -21,7 +23,7 @@ class HomeView extends StatelessWidget {
               shape: BoxShape.circle,
             ),
             child: Image.asset(
-              "assets/images/profile.png",
+              ImageAsset.profile,
             ),
           ),
         ],
@@ -31,13 +33,13 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             Image.asset(
-              "assets/images/graph.png",
+              ImageAsset.graph,
               width: size.width,
               fit: BoxFit.cover,
             ),
             const Gap(20),
             Card(
-              clipBehavior: Clip.hardEdge,prp
+              clipBehavior: Clip.hardEdge,
               child: Container(
                 width: size.width,
                 padding: const EdgeInsets.all(12),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:invoice_ui/assets/images/image_asset.dart';
+import 'package:invoice_ui/view/editProfile/edit_profile_view.dart';
+import 'package:invoice_ui/view/login/login_view.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -11,9 +14,15 @@ class ProfileView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        actions: const [
-          Icon(Icons.edit_calendar_outlined),
-          Gap(10),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (ctx) => const EditProfileView()));
+            },
+            icon: const Icon(Icons.edit_calendar_outlined),
+          ),
+          const Gap(10),
         ],
       ),
       body: Padding(
@@ -23,17 +32,17 @@ class ProfileView extends StatelessWidget {
           children: [
             Stack(
               children: [
-                Container(
+                SizedBox(
                   width: size.width,
-                  height: size.height * .35,
-                  color: Colors.amber,
+                  height: size.height * .32,
                 ),
                 Positioned(
                   bottom: 0,
+                  left: 0,
+                  right: 0,
                   child: Card(
                     clipBehavior: Clip.hardEdge,
                     child: Container(
-                      width: size.width,
                       padding: const EdgeInsets.all(12),
                       decoration: const BoxDecoration(
                         color: Color(0xff0f0f0f),
@@ -80,7 +89,13 @@ class ProfileView extends StatelessWidget {
                                 Icons.logout,
                                 color: theme.colorScheme.error,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => const LoginView(),
+                                    ));
+                              },
                               label: Text(
                                 "Logout",
                                 style: theme.textTheme.bodyLarge!.copyWith(
@@ -95,19 +110,20 @@ class ProfileView extends StatelessWidget {
                   ),
                 ),
                 Positioned(
-                    top: -10,
-                    left: 0,
-                    child: Container(
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color.fromARGB(255, 14, 14, 14),
-                        image: const DecorationImage(
-                          image: AssetImage("assets/images/profile.png"),
-                        ),
+                  top: 0,
+                  left: 100,
+                  child: Container(
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xff111318),
+                      image: const DecorationImage(
+                        image: AssetImage(ImageAsset.profile),
                       ),
-                    ))
+                    ),
+                  ),
+                )
               ],
             )
           ],

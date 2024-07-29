@@ -15,6 +15,7 @@ class LoginView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           Icon(
             Icons.language,
