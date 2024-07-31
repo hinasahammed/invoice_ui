@@ -83,7 +83,8 @@ class ProfileView extends StatelessWidget {
                             height: 50,
                             child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff040404),
+                                backgroundColor:
+                                    const Color.fromARGB(255, 19, 19, 19),
                               ),
                               icon: Icon(
                                 Icons.logout,
@@ -109,10 +110,10 @@ class ProfileView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 0,
-                  left: 100,
+                Align(
+                  alignment: Alignment.topCenter,
                   child: Container(
+                    margin: const EdgeInsets.only(top: 10),
                     width: 80,
                     height: 80,
                     decoration: BoxDecoration(
