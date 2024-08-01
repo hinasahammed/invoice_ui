@@ -24,17 +24,18 @@ class RegisterView extends StatelessWidget {
           const Gap(10),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Container(
-          width: size.width,
-          height: size.height,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage(ImageAsset.background),
-              fit: BoxFit.cover,
-            ),
+      body: Container(
+        width: size.width,
+        height: size.height,
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(ImageAsset.background),
+            fit: BoxFit.fitWidth,
           ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

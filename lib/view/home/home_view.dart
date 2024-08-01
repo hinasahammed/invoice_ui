@@ -3,9 +3,15 @@ import 'package:gap/gap.dart';
 import 'package:invoice_ui/assets/icons/icon_asset.dart';
 import 'package:invoice_ui/assets/images/image_asset.dart';
 
-class HomeView extends StatelessWidget {
+class HomeView extends StatefulWidget {
   const HomeView({super.key});
 
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
+
+class _HomeViewState extends State<HomeView> {
+  bool isActive = false;
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -16,16 +22,38 @@ class HomeView extends StatelessWidget {
         leading: Image.asset(IconAsset.logo),
         title: const Text("Trialz"),
         actions: [
-          Container(
-            padding: const EdgeInsets.all(3),
-            decoration: BoxDecoration(
-              color: theme.colorScheme.primaryContainer,
-              shape: BoxShape.circle,
-            ),
-            child: Image.asset(
-              ImageAsset.profile,
-            ),
+          Stack(
+            children: [
+              InkWell(
+                onTap: () => setState(() {
+                  isActive = !isActive;
+                }),
+                child: Container(
+                  padding: const EdgeInsets.all(3),
+                  decoration: BoxDecoration(
+                    color: theme.colorScheme.primaryContainer,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    ImageAsset.profile,
+                  ),
+                ),
+              ),
+              Positioned(
+                right: 0,
+                top: 5,
+                child: Container(
+                  width: 12,
+                  height: 12,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: isActive ? Colors.green : Colors.deepOrange,
+                  ),
+                ),
+              )
+            ],
           ),
+          const Gap(10),
         ],
       ),
       body: Padding(

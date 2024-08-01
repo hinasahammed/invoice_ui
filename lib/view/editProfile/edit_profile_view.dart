@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:invoice_ui/assets/images/image_asset.dart';
 import 'package:invoice_ui/res/components/common/custom_button.dart';
 import 'package:invoice_ui/res/components/common/custom_textformfield.dart';
 import 'package:invoice_ui/view/profile/profile_view.dart';
@@ -16,11 +17,18 @@ class EditProfileView extends StatelessWidget {
         automaticallyImplyLeading: true,
       ),
       body: SafeArea(
-          child: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          width: size.width,
-          height: size.height,
+          child: Container(
+        width: size.width,
+        height: size.height,
+        alignment: Alignment.center,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(ImageAsset.background),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(16),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
