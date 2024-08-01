@@ -25,6 +25,9 @@ class _HomeViewState extends State<HomeView> {
           Stack(
             children: [
               InkWell(
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
                 onTap: () => setState(() {
                   isActive = !isActive;
                 }),
@@ -56,7 +59,7 @@ class _HomeViewState extends State<HomeView> {
           const Gap(10),
         ],
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
