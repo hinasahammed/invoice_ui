@@ -5,10 +5,18 @@ import 'package:invoice_ui/res/components/common/custom_button.dart';
 import 'package:invoice_ui/res/components/common/custom_textformfield.dart';
 import 'package:invoice_ui/view/register/register_view.dart';
 import 'package:invoice_ui/view/tabBar/custom_tab_bar_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  final userNameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -39,95 +47,114 @@ class LoginView extends StatelessWidget {
         ),
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "Login",
-                style: theme.textTheme.titleLarge!.copyWith(
-                  color: theme.colorScheme.onSurface,
-                ),
-              ),
-              Text(
-                "Login to your account",
-                style: theme.textTheme.bodyLarge!.copyWith(
-                  color: theme.colorScheme.onSurface.withOpacity(.4),
-                ),
-              ),
-              const Gap(20),
-              const CustomTextformfield(
-                prefixIcon: Icons.person_2_outlined,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                ),
-                label: "Username",
-              ),
-              const CustomTextformfield(
-                prefixIcon: Icons.lock,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10),
-                ),
-                suffixIcon: Icons.visibility_outlined,
-                label: "Password",
-              ),
-              const Gap(20),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  "Forget password?",
-                  style: theme.textTheme.labelLarge!.copyWith(
-                    color: theme.colorScheme.primary,
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Login",
+                  style: theme.textTheme.titleLarge!.copyWith(
+                    color: theme.colorScheme.onSurface,
                   ),
                 ),
-              ),
-              const Gap(20),
-              SizedBox(
-                height: 50,
-                child: CustomButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (ctx) => const CustomTabBarView(),
-                      ),
-                    );
-                  },
-                  btnTitle: "Login",
+                Text(
+                  "Login to your account",
+                  style: theme.textTheme.bodyLarge!.copyWith(
+                    color: theme.colorScheme.onSurface.withOpacity(.4),
+                  ),
                 ),
-              ),
-              const Gap(50),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "Don't have an account",
+                const Gap(20),
+                CustomTextformfield(
+                  controller: userNameController,
+                  prefixIcon: Icons.person_2_outlined,
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(10),
+                    topRight: Radius.circular(10),
+                  ),
+                  label: "Username",
+                ),
+                const CustomTextformfield(
+                  prefixIcon: Icons.lock,
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(10),
+                    bottomRight: Radius.circular(10),
+                  ),
+                  suffixIcon: Icons.visibility_outlined,
+                  label: "Password",
+                  controller: null,
+                ),
+                const Gap(20),
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "Forget password?",
                     style: theme.textTheme.labelLarge!.copyWith(
-                      color: theme.colorScheme.onSurface,
+                      color: theme.colorScheme.primary,
                     ),
                   ),
-                  TextButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (ctx) => const RegisterView(),
+                ),
+                const Gap(20),
+                SizedBox(
+                  height: 50,
+                  child: CustomButton(
+                    onPressed: () {
+                      login(userNameController.text.trim());
+                    },
+                    btnTitle: "Login",
+                  ),
+                ),
+                const Gap(50),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "Don't have an account",
+                      style: theme.textTheme.labelLarge!.copyWith(
+                        color: theme.colorScheme.onSurface,
+                      ),
+                    ),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (ctx) => const RegisterView(),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          "Signup",
+                          style: theme.textTheme.labelLarge!.copyWith(
+                            color: theme.colorScheme.primary,
                           ),
-                        );
-                      },
-                      child: Text(
-                        "Signup",
-                        style: theme.textTheme.labelLarge!.copyWith(
-                          color: theme.colorScheme.primary,
-                        ),
-                      ))
-                ],
-              )
-            ],
+                        ))
+                  ],
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  void login(String userName) async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setString("loginUserName", userName);
+    pref.setBool("isLogedin", true).then(
+          (value) => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (ctx) => const CustomTabBarView(),
+            ),
+          ),
+        );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    userNameController.dispose();
   }
 }
