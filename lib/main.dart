@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:invoice_ui/view/register/register_view.dart';
+import 'package:invoice_ui/view/splash/splash_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const RegisterView(),
+      home: const SplashView(),
     );
   }
 }
