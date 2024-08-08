@@ -58,17 +58,17 @@ class RegisterView extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                label: "Username",
+                label: "Username", controller: null,
               ),
               CustomTextformfield(
                 prefixIcon: Icons.mail_outline,
                 borderRadius: BorderRadius.circular(0),
-                label: "Email",
+                label: "Email", controller: null,
               ),
               CustomTextformfield(
                 prefixIcon: Icons.phone,
                 borderRadius: BorderRadius.circular(0),
-                label: "Phone",
+                label: "Phone", controller: null,
               ),
               const CustomTextformfield(
                 prefixIcon: Icons.lock,
@@ -77,7 +77,7 @@ class RegisterView extends StatelessWidget {
                   bottomRight: Radius.circular(10),
                 ),
                 suffixIcon: Icons.visibility_outlined,
-                label: "Password",
+                label: "Password", controller: null,
               ),
               const Gap(50),
               SizedBox(
