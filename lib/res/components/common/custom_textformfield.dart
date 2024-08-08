@@ -5,17 +5,21 @@ class CustomTextformfield extends StatelessWidget {
   final String label;
   final BorderRadius borderRadius;
   final IconData? suffixIcon;
-  const CustomTextformfield(
-      {super.key,
-      this.prefixIcon,
-      required this.label,
-      required this.borderRadius,
-      this.suffixIcon});
+  final TextEditingController? controller;
+  const CustomTextformfield({
+    super.key,
+    this.prefixIcon,
+    required this.label,
+    required this.borderRadius,
+    required this.controller,
+    this.suffixIcon,
+  });
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return TextFormField(
+      controller: controller,
       decoration: InputDecoration(
         prefixIcon: Icon(
           prefixIcon,
