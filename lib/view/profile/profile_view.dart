@@ -3,9 +3,30 @@ import 'package:gap/gap.dart';
 import 'package:invoice_ui/assets/images/image_asset.dart';
 import 'package:invoice_ui/view/editProfile/edit_profile_view.dart';
 import 'package:invoice_ui/view/login/login_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileView extends StatelessWidget {
+class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
+
+  @override
+  State<ProfileView> createState() => _ProfileViewState();
+}
+
+class _ProfileViewState extends State<ProfileView> {
+  String userName = '';
+  @override
+  void initState() {
+    super.initState();
+    getUsername();
+  }
+
+  void getUsername() async {
+    final pref = await SharedPreferences.getInstance();
+    var user = pref.getString("loginUserName");
+    setState(() {
+      userName = user ?? '';
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,7 +72,7 @@ class ProfileView extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "David",
+                            userName,
                             style: theme.textTheme.bodyLarge!.copyWith(
                               color: theme.colorScheme.onSurface,
                             ),
@@ -91,11 +112,7 @@ class ProfileView extends StatelessWidget {
                                 color: theme.colorScheme.error,
                               ),
                               onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => const LoginView(),
-                                    ));
+                                logout();
                               },
                               label: Text(
                                 "Logout",
@@ -110,17 +127,21 @@ class ProfileView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xff111318),
-                      image: const DecorationImage(
-                        image: AssetImage(ImageAsset.profile),
+                Positioned(
+                  top: -40,
+                  left: 100,
+                  child: Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: const Color(0xff111318),
+                        image: const DecorationImage(
+                          image: AssetImage(ImageAsset.profile),
+                        ),
                       ),
                     ),
                   ),
@@ -131,5 +152,16 @@ class ProfileView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void logout() async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setBool("isLogedin", false).then(
+          (value) => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const LoginView(),
+              )),
+        );
   }
 }
