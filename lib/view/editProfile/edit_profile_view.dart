@@ -45,12 +45,12 @@ class EditProfileView extends StatelessWidget {
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                label: "Username",
+                label: "Username", controller: null,
               ),
               CustomTextformfield(
                 prefixIcon: Icons.mail_outline,
                 borderRadius: BorderRadius.circular(0),
-                label: "Email",
+                label: "Email", controller: null,
               ),
               const CustomTextformfield(
                 prefixIcon: Icons.phone,
@@ -58,7 +58,7 @@ class EditProfileView extends StatelessWidget {
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10),
                 ),
-                label: "Phone",
+                label: "Phone", controller: null,
               ),
               const Gap(50),
               SizedBox(
