@@ -18,7 +18,8 @@ class LoginViewmodel {
         Utils()
             .showFlushToast(context, "Error", "Incorrect password or username");
       }
-    } else {
+    } else if (name == userName && pass == password) {
+      pref.setBool("isLogedin", true);
       if (context.mounted) {
         Navigator.pushReplacement(
           context,
@@ -26,6 +27,10 @@ class LoginViewmodel {
             builder: (ctx) => const CustomTabBarView(),
           ),
         );
+      }
+    } else {
+      if (context.mounted) {
+        Utils().showFlushToast(context, "Error", "Something went wrong!");
       }
     }
   }
