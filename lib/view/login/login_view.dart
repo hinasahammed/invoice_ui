@@ -85,6 +85,19 @@ class _LoginViewState extends State<LoginView> {
                   label: "Password",
                 ),
                 const Gap(20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CheckboxMenuButton(
+                      value: true,
+                      onChanged: (value) {},
+                      child: const Text(
+                        'Remember me',
+                      ),
+                    ),
+                  ],
+                ),
+                const Gap(20),
                 TextButton(
                   onPressed: () {},
                   child: Text(
