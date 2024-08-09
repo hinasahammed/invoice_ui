@@ -14,6 +14,8 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   String userName = '';
+  String email = '';
+  String contact = '';
   @override
   void initState() {
     super.initState();
@@ -22,9 +24,13 @@ class _ProfileViewState extends State<ProfileView> {
 
   void getUsername() async {
     final pref = await SharedPreferences.getInstance();
-    var user = pref.getString("loginUserName");
+    var user = pref.getString("userName");
+    var uEmail = pref.getString("email");
+    var phone = pref.getString("contact");
     setState(() {
       userName = user ?? '';
+      email = uEmail ?? '';
+      contact = phone ?? '';
     });
   }
 
@@ -49,13 +55,12 @@ class _ProfileViewState extends State<ProfileView> {
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Stack(
               children: [
                 SizedBox(
                   width: size.width,
-                  height: size.height * .32,
+                  height: size.height * .37,
                 ),
                 Positioned(
                   bottom: 0,
@@ -78,7 +83,7 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                           ),
                           Text(
-                            "david012@gmail.com",
+                            email,
                             style: theme.textTheme.labelLarge!.copyWith(
                               color:
                                   theme.colorScheme.secondary.withOpacity(.3),
@@ -92,7 +97,7 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                           ),
                           Text(
-                            "7895789456",
+                            "+91$contact",
                             style: theme.textTheme.labelLarge!.copyWith(
                               color:
                                   theme.colorScheme.secondary.withOpacity(.3),
@@ -143,7 +148,33 @@ class _ProfileViewState extends State<ProfileView> {
                   ),
                 )
               ],
-            )
+            ),
+            const Gap(20),
+            Card(
+              child: ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.notifications_active),
+                title: const Text('Notifications'),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+              ),
+            ),
+            const Gap(10),
+            Card(
+              child: ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.language),
+                title: const Text('Language'),
+                trailing: const Icon(Icons.keyboard_arrow_right),
+              ),
+            ),
+            const Gap(10),
+            Card(
+              child: SwitchListTile(
+                value: true,
+                onChanged: (value) {},
+                title: const Text("Dark mode"),
+              ),
+            ),
           ],
         ),
       ),

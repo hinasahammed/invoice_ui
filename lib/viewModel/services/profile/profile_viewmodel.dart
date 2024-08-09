@@ -4,6 +4,8 @@ import 'package:invoice_ui/view/login/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileViewmodel {
+
+  
   void logout(BuildContext context) async {
     final pref = await SharedPreferences.getInstance();
     pref.setBool("isLogedin", false).then(
