@@ -6,13 +6,14 @@ class CustomTextformfield extends StatelessWidget {
   final BorderRadius borderRadius;
   final IconData? suffixIcon;
   final TextEditingController? controller;
+  final String? Function(String?)? validator;
   const CustomTextformfield({
     super.key,
     this.prefixIcon,
     required this.label,
     required this.borderRadius,
     required this.controller,
-    this.suffixIcon,
+    this.suffixIcon, this.validator,
   });
 
   @override
@@ -20,6 +21,7 @@ class CustomTextformfield extends StatelessWidget {
     final theme = Theme.of(context);
     return TextFormField(
       controller: controller,
+      validator: validator,
       decoration: InputDecoration(
         prefixIcon: Icon(
           prefixIcon,
