@@ -4,8 +4,7 @@ import 'package:invoice_ui/assets/images/image_asset.dart';
 import 'package:invoice_ui/res/components/common/custom_button.dart';
 import 'package:invoice_ui/res/components/common/custom_textformfield.dart';
 import 'package:invoice_ui/view/register/register_view.dart';
-import 'package:invoice_ui/view/tabBar/custom_tab_bar_view.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:invoice_ui/viewModel/services/login/login_viewmodel.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -99,7 +98,8 @@ class _LoginViewState extends State<LoginView> {
                   height: 50,
                   child: CustomButton(
                     onPressed: () {
-                      login(userNameController.text.trim());
+                      LoginViewmodel()
+                          .login(userNameController.text.trim(), context);
                     },
                     btnTitle: "Login",
                   ),
@@ -137,19 +137,6 @@ class _LoginViewState extends State<LoginView> {
         ),
       ),
     );
-  }
-
-  void login(String userName) async {
-    final pref = await SharedPreferences.getInstance();
-    pref.setString("loginUserName", userName);
-    pref.setBool("isLogedin", true).then(
-          (value) => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (ctx) => const CustomTabBarView(),
-            ),
-          ),
-        );
   }
 
   @override
