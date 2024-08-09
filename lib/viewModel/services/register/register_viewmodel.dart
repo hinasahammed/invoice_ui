@@ -4,8 +4,13 @@ import 'package:invoice_ui/view/login/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterViewmodel {
-  void register(String username, String email, String contact, String password,
-      BuildContext context) async {
+  void register(
+    String username,
+    String email,
+    String contact,
+    String password,
+    BuildContext context,
+  ) async {
     final pref = await SharedPreferences.getInstance();
     await pref.setString("userName", username);
     await pref.setString("email", email);
@@ -16,12 +21,11 @@ class RegisterViewmodel {
             context,
             MaterialPageRoute(
               builder: (context) => const LoginView(),
-            )).then(
-          (value) => Utils().showFlushToast(
-            context,
-            "Success",
-            "Account created sucessfully, try to login",
-          ),
+            ));
+        Utils().showFlushToast(
+          context,
+          "Success",
+          "Account created sucessfully, try to login",
         );
       },
     );

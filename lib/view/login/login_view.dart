@@ -15,6 +15,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -73,15 +74,15 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   label: "Username",
                 ),
-                const CustomTextformfield(
+                CustomTextformfield(
+                  controller: passwordController,
                   prefixIcon: Icons.lock,
-                  borderRadius: BorderRadius.only(
+                  borderRadius: const BorderRadius.only(
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10),
                   ),
                   suffixIcon: Icons.visibility_outlined,
                   label: "Password",
-                  controller: null,
                 ),
                 const Gap(20),
                 TextButton(
@@ -98,8 +99,11 @@ class _LoginViewState extends State<LoginView> {
                   height: 50,
                   child: CustomButton(
                     onPressed: () {
-                      LoginViewmodel()
-                          .login(userNameController.text.trim(), context);
+                      LoginViewmodel().login(
+                        userNameController.text.trim(),
+                        passwordController.text.trim(),
+                        context,
+                      );
                     },
                     btnTitle: "Login",
                   ),
@@ -115,20 +119,21 @@ class _LoginViewState extends State<LoginView> {
                       ),
                     ),
                     TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (ctx) => const RegisterView(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Signup",
-                          style: theme.textTheme.labelLarge!.copyWith(
-                            color: theme.colorScheme.primary,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (ctx) => const RegisterView(),
                           ),
-                        ))
+                        );
+                      },
+                      child: Text(
+                        "Signup",
+                        style: theme.textTheme.labelLarge!.copyWith(
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                    )
                   ],
                 )
               ],
@@ -143,5 +148,6 @@ class _LoginViewState extends State<LoginView> {
   void dispose() {
     super.dispose();
     userNameController.dispose();
+    passwordController.dispose();
   }
 }

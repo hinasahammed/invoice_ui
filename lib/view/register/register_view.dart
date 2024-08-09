@@ -4,10 +4,20 @@ import 'package:invoice_ui/assets/images/image_asset.dart';
 import 'package:invoice_ui/res/components/common/custom_button.dart';
 import 'package:invoice_ui/res/components/common/custom_textformfield.dart';
 import 'package:invoice_ui/view/login/login_view.dart';
+import 'package:invoice_ui/viewModel/services/register/register_viewmodel.dart';
 
-class RegisterView extends StatelessWidget {
+class RegisterView extends StatefulWidget {
   const RegisterView({super.key});
 
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
+  final userNameController = TextEditingController();
+  final emailController = TextEditingController();
+  final conctactController = TextEditingController();
+  final passwordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -52,43 +62,48 @@ class RegisterView extends StatelessWidget {
                 ),
               ),
               const Gap(20),
-              const CustomTextformfield(
+              CustomTextformfield(
+                controller: userNameController,
                 prefixIcon: Icons.person_2_outlined,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   topRight: Radius.circular(10),
                 ),
-                label: "Username", controller: null,
+                label: "Username",
               ),
               CustomTextformfield(
+                controller: emailController,
                 prefixIcon: Icons.mail_outline,
                 borderRadius: BorderRadius.circular(0),
-                label: "Email", controller: null,
+                label: "Email",
               ),
               CustomTextformfield(
+                controller: conctactController,
                 prefixIcon: Icons.phone,
                 borderRadius: BorderRadius.circular(0),
-                label: "Phone", controller: null,
+                label: "Phone",
               ),
-              const CustomTextformfield(
+              CustomTextformfield(
+                controller: passwordController,
                 prefixIcon: Icons.lock,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(10),
                   bottomRight: Radius.circular(10),
                 ),
                 suffixIcon: Icons.visibility_outlined,
-                label: "Password", controller: null,
+                label: "Password",
               ),
               const Gap(50),
               SizedBox(
                 height: 50,
                 child: CustomButton(
                   onPressed: () {
-                    Navigator.push(
+                    RegisterViewmodel().register(
+                      userNameController.text.trim(),
+                      emailController.text.trim(),
+                      conctactController.text.trim(),
+                      passwordController.text.trim(),
                       context,
-                      MaterialPageRoute(
-                        builder: (ctx) => const LoginView(),
-                      ),
                     );
                   },
                   btnTitle: "Sign up",
@@ -126,5 +141,14 @@ class RegisterView extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    userNameController.dispose();
+    emailController.dispose();
+    conctactController.dispose();
+    passwordController.dispose();
   }
 }
