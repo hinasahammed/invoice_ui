@@ -38,6 +38,7 @@ dependencies:
   gap: ^3.0.1
   shared_preferences: ^2.3.1
   lottie: ^3.1.2
+  awesome_dialog: ^3.2.1
 
 dev_dependencies:
   flutter_test:
