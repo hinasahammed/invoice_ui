@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:invoice_ui/assets/images/image_asset.dart';
 import 'package:invoice_ui/view/editProfile/edit_profile_view.dart';
-import 'package:invoice_ui/view/login/login_view.dart';
+import 'package:invoice_ui/viewModel/services/profile/profile_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatefulWidget {
@@ -112,7 +112,7 @@ class _ProfileViewState extends State<ProfileView> {
                                 color: theme.colorScheme.error,
                               ),
                               onPressed: () {
-                                logout();
+                                ProfileViewmodel().logoutDialogue(context);
                               },
                               label: Text(
                                 "Logout",
@@ -127,21 +127,17 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: -40,
-                  left: 100,
-                  child: Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        color: const Color(0xff111318),
-                        image: const DecorationImage(
-                          image: AssetImage(ImageAsset.profile),
-                        ),
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: Container(
+                    margin: const EdgeInsets.only(top: 10),
+                    width: 80,
+                    height: 80,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xff111318),
+                      image: const DecorationImage(
+                        image: AssetImage(ImageAsset.profile),
                       ),
                     ),
                   ),
@@ -152,16 +148,5 @@ class _ProfileViewState extends State<ProfileView> {
         ),
       ),
     );
-  }
-
-  void logout() async {
-    final pref = await SharedPreferences.getInstance();
-    pref.setBool("isLogedin", false).then(
-          (value) => Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const LoginView(),
-              )),
-        );
   }
 }
