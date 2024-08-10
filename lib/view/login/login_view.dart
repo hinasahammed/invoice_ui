@@ -1,8 +1,10 @@
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:invoice_ui/assets/images/image_asset.dart';
 import 'package:invoice_ui/res/components/common/custom_button.dart';
 import 'package:invoice_ui/res/components/common/custom_textformfield.dart';
+import 'package:invoice_ui/view/login/widgets/saved_password_card.dart';
 import 'package:invoice_ui/view/register/register_view.dart';
 import 'package:invoice_ui/viewModel/services/login/login_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,15 +25,36 @@ class _LoginViewState extends State<LoginView> {
   @override
   void initState() {
     super.initState();
-    isStoredloginData();
+    wantStoredPassword();
+  }
+
+  void wantStoredPassword() async {
+    final pref = await SharedPreferences.getInstance();
+    var user = pref.getString("isRememberUserName");
+    var password = pref.getString("isRememberPassword");
+    if (password != null && user != null) {
+      if (mounted) {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) => SavedPasswordCard(
+            onPressed: isStoredloginData,
+          ),
+        );
+      }
+    }
   }
 
   void isStoredloginData() async {
     final pref = await SharedPreferences.getInstance();
     var user = pref.getString("isRememberUserName");
     var password = pref.getString("isRememberPassword");
-          userNameController.text = user ?? '';
-          passwordController.text = password ?? '';
+    userNameController.text = user ?? '';
+    passwordController.text = password ?? '';
+
+    if (mounted) {
+      Navigator.pop(context);
+    }
   }
 
   @override
