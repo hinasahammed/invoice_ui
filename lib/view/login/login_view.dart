@@ -5,6 +5,7 @@ import 'package:invoice_ui/res/components/common/custom_button.dart';
 import 'package:invoice_ui/res/components/common/custom_textformfield.dart';
 import 'package:invoice_ui/view/register/register_view.dart';
 import 'package:invoice_ui/viewModel/services/login/login_viewmodel.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -17,6 +18,22 @@ class _LoginViewState extends State<LoginView> {
   final userNameController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isRemember = false;
+
+  @override
+  void initState() {
+    super.initState();
+    isStoredloginData();
+  }
+
+  void isStoredloginData() async {
+    final pref = await SharedPreferences.getInstance();
+    var user = pref.getString("isRememberUserName");
+    var password = pref.getString("isRememberPassword");
+          userNameController.text = user ?? '';
+          passwordController.text = password ?? '';
+  }
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -89,8 +106,12 @@ class _LoginViewState extends State<LoginView> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CheckboxMenuButton(
-                      value: true,
-                      onChanged: (value) {},
+                      value: isRemember,
+                      onChanged: (value) {
+                        setState(() {
+                          isRemember = value!;
+                        });
+                      },
                       child: const Text(
                         'Remember me',
                       ),
@@ -116,6 +137,7 @@ class _LoginViewState extends State<LoginView> {
                         userNameController.text.trim(),
                         passwordController.text.trim(),
                         context,
+                        isRemember,
                       );
                     },
                     btnTitle: "Login",
