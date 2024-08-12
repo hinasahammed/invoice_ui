@@ -11,16 +11,16 @@ class CustomTabBarView extends StatefulWidget {
 
 class _CustomTabBarViewState extends State<CustomTabBarView> {
   int currentIndex = 0;
-  final List _pages = [
-    const HomeView(),
-    const ProfileView(),
-  ];
 
   @override
   Widget build(BuildContext context) {
+    final List pages = [
+      const HomeView(),
+      const ProfileView(),
+    ];
     final theme = Theme.of(context);
     return Scaffold(
-      body: _pages[currentIndex],
+      body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         onTap: (value) {
