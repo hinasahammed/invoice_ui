@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:invoice_ui/res/utils/theme.dart';
 import 'package:invoice_ui/view/splash/splash_view.dart';
+import 'package:invoice_ui/viewModel/services/profile/profile_viewmodel.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    ProfileViewmodel().getTheme();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Invoice',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xff0E75F4),
-          brightness: Brightness.dark,
-          primary: const Color(0xff0E75F4),
-          onPrimary: Colors.white,
-        ),
-        useMaterial3: true,
+    return ValueListenableBuilder(
+      valueListenable: MyThemes.isDark,
+      builder: (context, value, child) => MaterialApp(
+        title: 'Invoice',
+        debugShowCheckedModeBanner: false,
+        theme: value ? MyThemes.darkThemeData : MyThemes.appThemeData,
+        home: const SplashView(),
       ),
-      home: const SplashView(),
     );
   }
 }
