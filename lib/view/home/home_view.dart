@@ -74,21 +74,21 @@ class _HomeViewState extends State<HomeView> {
               child: Container(
                 width: size.width,
                 padding: const EdgeInsets.all(12),
-                decoration: const BoxDecoration(
-                  color: Color(0xff0f0f0f),
-                ),
+                decoration: const BoxDecoration(),
                 child: Row(
                   children: [
-                    Container(
-                      height: 100,
-                      width: 30,
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.onSurface,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Icon(
-                        Icons.bookmark_add_outlined,
-                        color: theme.colorScheme.surface,
+                    Card(
+                      elevation: 5,
+                      child: Container(
+                        height: 100,
+                        width: 30,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Icon(
+                          Icons.bookmark_add_outlined,
+                          color: theme.colorScheme.onSurface,
+                        ),
                       ),
                     ),
                     const Gap(10),
@@ -120,10 +120,13 @@ class _HomeViewState extends State<HomeView> {
                     Container(
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: const Color(0xff131313),
+                        color: theme.colorScheme.surface,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: const Icon(Icons.arrow_forward),
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: theme.colorScheme.onSurface,
+                      ),
                     )
                   ],
                 ),
