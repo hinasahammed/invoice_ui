@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:invoice_ui/assets/images/image_asset.dart';
@@ -10,7 +9,7 @@ import 'package:invoice_ui/viewModel/services/login/login_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+  const LoginView({super.key, });
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -161,6 +160,7 @@ class _LoginViewState extends State<LoginView> {
                         passwordController.text.trim(),
                         context,
                         isRemember,
+                        
                       );
                     },
                     btnTitle: "Login",
@@ -181,7 +181,7 @@ class _LoginViewState extends State<LoginView> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (ctx) => const RegisterView(),
+                            builder: (ctx) =>  RegisterView(),
                           ),
                         );
                       },
