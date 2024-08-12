@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:invoice_ui/assets/images/image_asset.dart';
+import 'package:invoice_ui/res/utils/theme.dart';
 import 'package:invoice_ui/view/editProfile/edit_profile_view.dart';
 import 'package:invoice_ui/viewModel/services/profile/profile_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -67,12 +68,9 @@ class _ProfileViewState extends State<ProfileView> {
                   left: 0,
                   right: 0,
                   child: Card(
-                    clipBehavior: Clip.hardEdge,
+                    elevation: 3,
                     child: Container(
                       padding: const EdgeInsets.all(12),
-                      decoration: const BoxDecoration(
-                        color: Color(0xff0f0f0f),
-                      ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -86,7 +84,7 @@ class _ProfileViewState extends State<ProfileView> {
                             email,
                             style: theme.textTheme.labelLarge!.copyWith(
                               color:
-                                  theme.colorScheme.secondary.withOpacity(.3),
+                                  theme.colorScheme.onSurface.withOpacity(.3),
                             ),
                           ),
                           const Gap(20),
@@ -100,7 +98,7 @@ class _ProfileViewState extends State<ProfileView> {
                             "+91$contact",
                             style: theme.textTheme.labelLarge!.copyWith(
                               color:
-                                  theme.colorScheme.secondary.withOpacity(.3),
+                                  theme.colorScheme.onSurface.withOpacity(.3),
                             ),
                           ),
                           const Gap(30),
@@ -109,12 +107,11 @@ class _ProfileViewState extends State<ProfileView> {
                             height: 50,
                             child: ElevatedButton.icon(
                               style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromARGB(255, 19, 19, 19),
+                                backgroundColor: theme.colorScheme.onSurface,
                               ),
                               icon: Icon(
                                 Icons.logout,
-                                color: theme.colorScheme.error,
+                                color: theme.colorScheme.surface,
                               ),
                               onPressed: () {
                                 ProfileViewmodel().logoutDialogue(context);
@@ -122,7 +119,7 @@ class _ProfileViewState extends State<ProfileView> {
                               label: Text(
                                 "Logout",
                                 style: theme.textTheme.bodyLarge!.copyWith(
-                                  color: theme.colorScheme.error,
+                                  color: theme.colorScheme.surface,
                                 ),
                               ),
                             ),
@@ -134,15 +131,16 @@ class _ProfileViewState extends State<ProfileView> {
                 ),
                 Align(
                   alignment: Alignment.topCenter,
-                  child: Container(
-                    margin: const EdgeInsets.only(top: 10),
-                    width: 80,
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: const Color(0xff111318),
-                      image: const DecorationImage(
-                        image: AssetImage(ImageAsset.profile),
+                  child: Card(
+                    child: Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      width: 80,
+                      height: 80,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        image: const DecorationImage(
+                          image: AssetImage(ImageAsset.profile),
+                        ),
                       ),
                     ),
                   ),
@@ -170,8 +168,11 @@ class _ProfileViewState extends State<ProfileView> {
             const Gap(10),
             Card(
               child: SwitchListTile(
-                value: true,
-                onChanged: (value) {},
+                value: MyThemes.isDark.value,
+                onChanged: (value) {
+                  MyThemes.isDark.value = value;
+                  ProfileViewmodel().setTheme(value);
+                },
                 title: const Text("Dark mode"),
               ),
             ),
