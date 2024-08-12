@@ -6,7 +6,7 @@ import 'package:invoice_ui/viewModel/services/splash/splash_viewmodel.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashView extends StatefulWidget {
-  const SplashView({super.key});
+  const SplashView({super.key, });
 
   @override
   State<SplashView> createState() => _SplashViewState();
@@ -21,8 +21,6 @@ class _SplashViewState extends State<SplashView> {
       () => SplashViewmodel().isLogin(context),
     );
   }
-
-  
 
   @override
   Widget build(BuildContext context) {
