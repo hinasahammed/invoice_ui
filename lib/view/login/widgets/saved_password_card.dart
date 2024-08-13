@@ -34,7 +34,7 @@ class SavedPasswordCard extends StatelessWidget {
                 color: theme.colorScheme.primaryContainer,
               ),
               child: Text(
-                "Hinas",
+                "******",
                 style: theme.textTheme.bodyLarge!.copyWith(
                   color: theme.colorScheme.onPrimaryContainer,
                   fontWeight: FontWeight.bold,
@@ -86,7 +86,7 @@ class SavedPasswordCard extends StatelessWidget {
               const Gap(10),
               SizedBox(
                 child: CustomButton(
-                  onPressed:onPressed,
+                  onPressed: onPressed,
                   btnTitle: "Use",
                 ),
               )
