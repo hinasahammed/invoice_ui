@@ -13,7 +13,8 @@ class CustomTextformfield extends StatelessWidget {
     required this.label,
     required this.borderRadius,
     required this.controller,
-    this.suffixIcon, this.validator,
+    this.suffixIcon,
+    this.validator,
   });
 
   @override
@@ -22,6 +23,7 @@ class CustomTextformfield extends StatelessWidget {
     return TextFormField(
       controller: controller,
       validator: validator,
+      style: TextStyle(color: theme.colorScheme.onPrimary),
       decoration: InputDecoration(
         prefixIcon: Icon(
           prefixIcon,
