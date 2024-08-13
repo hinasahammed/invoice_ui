@@ -1,5 +1,6 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
+import 'package:invoice_ui/res/utils/languages.dart';
 import 'package:invoice_ui/res/utils/theme.dart';
 import 'package:invoice_ui/view/login/login_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -46,5 +47,16 @@ class ProfileViewmodel {
     final pref = await SharedPreferences.getInstance();
 
     pref.setBool("isDarkmode", value);
+  }
+
+  void getLanguage() async {
+    final pref = await SharedPreferences.getInstance();
+    var val = pref.getString("language") ?? "English";
+    Languages.lang.value = val;
+  }
+
+  void setLanguage(String value) async {
+    final pref = await SharedPreferences.getInstance();
+    pref.setString("language", value);
   }
 }
