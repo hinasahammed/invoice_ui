@@ -9,7 +9,9 @@ import 'package:invoice_ui/viewModel/services/login/login_viewmodel.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginView extends StatefulWidget {
-  const LoginView({super.key, });
+  const LoginView({
+    super.key,
+  });
 
   @override
   State<LoginView> createState() => _LoginViewState();
@@ -160,7 +162,6 @@ class _LoginViewState extends State<LoginView> {
                         passwordController.text.trim(),
                         context,
                         isRemember,
-                        
                       );
                     },
                     btnTitle: "Login",
@@ -181,7 +182,7 @@ class _LoginViewState extends State<LoginView> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (ctx) =>  RegisterView(),
+                            builder: (ctx) => const RegisterView(),
                           ),
                         );
                       },
