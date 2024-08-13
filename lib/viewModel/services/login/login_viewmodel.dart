@@ -33,8 +33,7 @@ class LoginViewmodel {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-            builder: (ctx) => CustomTabBarView(
-            ),
+            builder: (ctx) => const CustomTabBarView(),
           ),
         );
       }
