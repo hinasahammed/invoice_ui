@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:invoice_ui/assets/images/image_asset.dart';
+import 'package:invoice_ui/res/utils/languages.dart';
 import 'package:invoice_ui/res/utils/theme.dart';
 import 'package:invoice_ui/view/editProfile/edit_profile_view.dart';
 import 'package:invoice_ui/viewModel/services/profile/profile_viewmodel.dart';
@@ -53,130 +54,160 @@ class _ProfileViewState extends State<ProfileView> {
           const Gap(10),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                SizedBox(
-                  width: size.width,
-                  height: size.height * .37,
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Card(
-                    elevation: 3,
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            userName,
-                            style: theme.textTheme.bodyLarge!.copyWith(
-                              color: theme.colorScheme.onSurface,
-                            ),
-                          ),
-                          Text(
-                            email,
-                            style: theme.textTheme.labelLarge!.copyWith(
-                              color:
-                                  theme.colorScheme.onSurface.withOpacity(.3),
-                            ),
-                          ),
-                          const Gap(20),
-                          Text(
-                            "Contact",
-                            style: theme.textTheme.bodyLarge!.copyWith(
-                              color: theme.colorScheme.onSurface,
-                            ),
-                          ),
-                          Text(
-                            "+91$contact",
-                            style: theme.textTheme.labelLarge!.copyWith(
-                              color:
-                                  theme.colorScheme.onSurface.withOpacity(.3),
-                            ),
-                          ),
-                          const Gap(30),
-                          SizedBox(
-                            width: double.infinity,
-                            height: 50,
-                            child: ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: theme.colorScheme.onSurface,
+      body: ValueListenableBuilder(
+        valueListenable: Languages.lang,
+        builder: (context, value, child) => Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  SizedBox(
+                    width: size.width,
+                    height: size.height * .37,
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Card(
+                      elevation: 3,
+                      child: Container(
+                        padding: const EdgeInsets.all(12),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              userName,
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                color: theme.colorScheme.onSurface,
                               ),
-                              icon: Icon(
-                                Icons.logout,
-                                color: theme.colorScheme.surface,
+                            ),
+                            Text(
+                              email,
+                              style: theme.textTheme.labelLarge!.copyWith(
+                                color:
+                                    theme.colorScheme.onSurface.withOpacity(.3),
                               ),
-                              onPressed: () {
-                                ProfileViewmodel().logoutDialogue(context);
-                              },
-                              label: Text(
-                                "Logout",
-                                style: theme.textTheme.bodyLarge!.copyWith(
+                            ),
+                            const Gap(20),
+                            Text(
+                              Languages.lang.value == "English"
+                                  ? Languages().english['contact']!
+                                  : Languages().malayalam['contact']!,
+                              style: theme.textTheme.bodyLarge!.copyWith(
+                                color: theme.colorScheme.onSurface,
+                              ),
+                            ),
+                            Text(
+                              "+91$contact",
+                              style: theme.textTheme.labelLarge!.copyWith(
+                                color:
+                                    theme.colorScheme.onSurface.withOpacity(.3),
+                              ),
+                            ),
+                            const Gap(30),
+                            SizedBox(
+                              width: double.infinity,
+                              height: 50,
+                              child: ElevatedButton.icon(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: theme.colorScheme.onSurface,
+                                ),
+                                icon: Icon(
+                                  Icons.logout,
                                   color: theme.colorScheme.surface,
                                 ),
+                                onPressed: () {
+                                  ProfileViewmodel().logoutDialogue(context);
+                                },
+                                label: Text(
+                                  Languages.lang.value == "English"
+                                      ? Languages().english['logout']!
+                                      : Languages().malayalam['logout']!,
+                                  style: theme.textTheme.bodyLarge!.copyWith(
+                                    color: theme.colorScheme.surface,
+                                  ),
+                                ),
                               ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: Card(
-                    child: Container(
-                      margin: const EdgeInsets.only(top: 10),
-                      width: 80,
-                      height: 80,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(20),
-                        image: const DecorationImage(
-                          image: AssetImage(ImageAsset.profile),
+                            )
+                          ],
                         ),
                       ),
                     ),
                   ),
-                )
-              ],
-            ),
-            const Gap(20),
-            Card(
-              child: ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.notifications_active),
-                title: const Text('Notifications'),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Card(
+                      child: Container(
+                        margin: const EdgeInsets.only(top: 10),
+                        width: 80,
+                        height: 80,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          image: const DecorationImage(
+                            image: AssetImage(ImageAsset.profile),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-            ),
-            const Gap(10),
-            Card(
-              child: ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.language),
-                title: const Text('Language'),
-                trailing: const Icon(Icons.keyboard_arrow_right),
+              const Gap(20),
+              Card(
+                child: ListTile(
+                  onTap: () {},
+                  leading: const Icon(Icons.notifications_active),
+                  title: Text(
+                    Languages.lang.value == "English"
+                        ? Languages().english['notification']!
+                        : Languages().malayalam['notification']!,
+                  ),
+                  trailing: const Icon(Icons.keyboard_arrow_right),
+                ),
               ),
-            ),
-            const Gap(10),
-            Card(
-              child: SwitchListTile(
-                value: MyThemes.isDark.value,
-                onChanged: (value) {
-                  MyThemes.isDark.value = value;
-                  ProfileViewmodel().setTheme(value);
-                },
-                title: const Text("Dark mode"),
+              const Gap(10),
+              Card(
+                child: DropdownButtonFormField(
+                  value: Languages.lang.value,
+                  padding: const EdgeInsets.all(8),
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    prefixIcon: Icon(Icons.language),
+                    hintText: "Languages",
+                  ),
+                  items: const [
+                    DropdownMenuItem(
+                      value: "English",
+                      child: Text("English"),
+                    ),
+                    DropdownMenuItem(
+                      value: "Malayalam",
+                      child: Text("Malayalam"),
+                    ),
+                  ],
+                  onChanged: (value) {
+                    ProfileViewmodel().setLanguage(value!);
+                    ProfileViewmodel().getLanguage();
+                  },
+                ),
               ),
-            ),
-          ],
+              const Gap(10),
+              Card(
+                child: SwitchListTile(
+                  value: MyThemes.isDark.value,
+                  onChanged: (value) {
+                    MyThemes.isDark.value = value;
+                    ProfileViewmodel().setTheme(value);
+                  },
+                  title: Text(Languages.lang.value == "English"
+                      ? Languages().english['dark']!
+                      : Languages().malayalam['dark']!),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
