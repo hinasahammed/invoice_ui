@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:invoice_ui/res/utils/theme.dart';
 import 'package:invoice_ui/view/splash/splash_view.dart';
+import 'package:invoice_ui/viewModel/profile/language_viewmodel.dart';
 import 'package:invoice_ui/viewModel/services/profile/profile_viewmodel.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,13 +25,16 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: MyThemes.isDark,
-      builder: (context, value, child) => MaterialApp(
-        title: 'Invoice',
-        debugShowCheckedModeBanner: false,
-        theme: value ? MyThemes.darkThemeData : MyThemes.appThemeData,
-        home: const SplashView(),
+    return ChangeNotifierProvider(
+      create: (context) => LanguageViemodel(),
+      child: ValueListenableBuilder(
+        valueListenable: MyThemes.isDark,
+        builder: (context, value, child) => MaterialApp(
+          title: 'Invoice',
+          debugShowCheckedModeBanner: false,
+          theme: value ? MyThemes.darkThemeData : MyThemes.appThemeData,
+          home: const SplashView(),
+        ),
       ),
     );
   }

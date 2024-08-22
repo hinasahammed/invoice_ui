@@ -4,7 +4,9 @@ import 'package:invoice_ui/assets/images/image_asset.dart';
 import 'package:invoice_ui/res/utils/languages.dart';
 import 'package:invoice_ui/res/utils/theme.dart';
 import 'package:invoice_ui/view/editProfile/edit_profile_view.dart';
+import 'package:invoice_ui/viewModel/profile/language_viewmodel.dart';
 import 'package:invoice_ui/viewModel/services/profile/profile_viewmodel.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileView extends StatefulWidget {
@@ -54,9 +56,8 @@ class _ProfileViewState extends State<ProfileView> {
           const Gap(10),
         ],
       ),
-      body: ValueListenableBuilder(
-        valueListenable: Languages.lang,
-        builder: (context, value, child) => Padding(
+      body: Consumer<LanguageViemodel>(
+        builder: (context, language, child) => Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
             children: [
@@ -92,7 +93,7 @@ class _ProfileViewState extends State<ProfileView> {
                             ),
                             const Gap(20),
                             Text(
-                              Languages.lang.value == "English"
+                              language.lang == "English"
                                   ? Languages().english['contact']!
                                   : Languages().malayalam['contact']!,
                               style: theme.textTheme.bodyLarge!.copyWith(
@@ -122,7 +123,7 @@ class _ProfileViewState extends State<ProfileView> {
                                   ProfileViewmodel().logoutDialogue(context);
                                 },
                                 label: Text(
-                                  Languages.lang.value == "English"
+                                  language.lang == "English"
                                       ? Languages().english['logout']!
                                       : Languages().malayalam['logout']!,
                                   style: theme.textTheme.bodyLarge!.copyWith(
@@ -160,7 +161,7 @@ class _ProfileViewState extends State<ProfileView> {
                   onTap: () {},
                   leading: const Icon(Icons.notifications_active),
                   title: Text(
-                    Languages.lang.value == "English"
+                    language.lang == "English"
                         ? Languages().english['notification']!
                         : Languages().malayalam['notification']!,
                   ),
@@ -170,7 +171,7 @@ class _ProfileViewState extends State<ProfileView> {
               const Gap(10),
               Card(
                 child: DropdownButtonFormField(
-                  value: Languages.lang.value,
+                  value: language.lang,
                   padding: const EdgeInsets.all(8),
                   decoration: const InputDecoration(
                     border: InputBorder.none,
@@ -188,8 +189,8 @@ class _ProfileViewState extends State<ProfileView> {
                     ),
                   ],
                   onChanged: (value) {
-                    ProfileViewmodel().setLanguage(value!);
-                    ProfileViewmodel().getLanguage();
+                    language.setLanguage(value!);
+                    language.getLanguage();
                   },
                 ),
               ),
@@ -201,7 +202,7 @@ class _ProfileViewState extends State<ProfileView> {
                     MyThemes.isDark.value = value;
                     ProfileViewmodel().setTheme(value);
                   },
-                  title: Text(Languages.lang.value == "English"
+                  title: Text(language.lang == "English"
                       ? Languages().english['dark']!
                       : Languages().malayalam['dark']!),
                 ),

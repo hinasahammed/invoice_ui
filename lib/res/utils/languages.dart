@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class Languages {
-  static ValueNotifier<String> lang = ValueNotifier("English");
 
   Map<String, String> english = {
     "contact": "Contact",
